@@ -80,6 +80,19 @@ public class DishController {
 
     }
 
+//    @PostMapping("/status")
+//    @ApiOperation("起售停售")
+//    public Result save(@PathVariable  status){
+//        log.info("新增菜品:{}",dishDTO);
+//        dishService.saveWithFlavor(dishDTO);
+//        return Result.success();
+//    }
+    @PostMapping("/status/{status}")
+    @ApiOperation("起售停售菜品")
+    public Result<String> startOrStop(@PathVariable("status") Integer status, Long id){
+        dishService.startOrStop(status,id);
+        return Result.success();
+    }
 
 
 }
