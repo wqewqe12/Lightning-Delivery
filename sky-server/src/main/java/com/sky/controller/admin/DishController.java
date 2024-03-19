@@ -38,13 +38,7 @@ public class DishController {
         return Result.success();
     }
 
-    @PutMapping
-    @ApiOperation("修改菜品")
-    public Result update(@RequestBody DishDTO dishDTO){
-        log.info("修改菜品:{}",dishDTO);
-        dishService.updateWithFlavor(dishDTO);
-        return Result.success();
-    }
+
 
     @GetMapping(value = "/page")
     @ApiOperation("菜品分页查询")
@@ -68,7 +62,6 @@ public class DishController {
         log.info("根据id查询菜品:{}",id);
         DishVO dishVO = dishService.getByIdWithFlavor(id);
         return Result.success(dishVO);
-
     }
 
     @GetMapping("/list")
@@ -77,7 +70,13 @@ public class DishController {
         log.info("根据分类id查询菜品:{}",categoryId);
         List<Dish> list = dishService.list(categoryId);
         return Result.success(list);
-
+    }
+    @PutMapping
+    @ApiOperation("修改菜品")
+    public Result update(@RequestBody DishDTO dishDTO){
+        log.info("修改菜品:{}",dishDTO);
+        dishService.updateWithFlavor(dishDTO);
+        return Result.success();
     }
 
 //    @PostMapping("/status")
