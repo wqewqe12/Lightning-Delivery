@@ -20,4 +20,5 @@ public interface CategoryService {
     void startOrStop(Integer status, Long id);
     /*根基类型查询分类*/
     List<Category> list(Integer type);
+
 }
