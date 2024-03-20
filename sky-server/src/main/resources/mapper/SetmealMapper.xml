@@ -14,7 +14,7 @@
             on
                 s.category_id = c.id
         <where>
-            <if test="name != null">and s.name like concat('%',#{name},'%')</if>
+            <if test="name != null">s.name like concat('%',#{name},'%')</if>
             <if test="status != null">and s.status = #{status}</if>
             <if test="categoryId != null">and s.category_id = #{categoryId}</if>
         </where>
@@ -42,5 +42,12 @@
         </set>
         where id = #{id}
     </update>
-
+    <select id="list" parameterType="Setmeal" resultType="Setmeal">
+        select * from setmeal
+        <where>
+            <if test="name != null"> and name like concat('%',#{name},'%') </if>
+            <if test="categoryId != null"> and category_id = #{categoryId} </if>
+            <if test="status != null"> and status = #{status} </if>
+        </where>
+    </select>
 </mapper>
