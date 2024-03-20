@@ -143,7 +143,7 @@ public class DishServiceImpl implements DishService {
      * @param categoryId
      * @return
      */
-    @Override
+
     public List<Dish> list(Long categoryId) {
         Dish dish = Dish.builder()
                 .categoryId(categoryId)

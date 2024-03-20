@@ -15,6 +15,7 @@ import com.sky.mapper.SetmealDishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.SetmealService;
+import com.sky.vo.DishItemVO;
 import com.sky.vo.DishVO;
 import com.sky.vo.SetmealVO;
 import lombok.extern.slf4j.Slf4j;
@@ -67,13 +68,13 @@ public class SetmealServiceImpl implements SetmealService {
         Long setmealId = setmeal.getId();
         //获取套餐所关联的菜品
         List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
+        //把关联表上菜品id赋上套餐的id
+        /*
+         * 1 2
+         * 3 2
+         * 4 2
+         * */
         setmealDishes.forEach(setmealDish -> {
-            //把关联表上菜品id赋上套餐的id
-            /*
-             * 1 2
-             * 3 2
-             * 4 2
-             * */
             setmealDish.setSetmealId(setmealId);
         });
         setmealDishMapper.insertBatch(setmealDishes);
@@ -97,12 +98,12 @@ public class SetmealServiceImpl implements SetmealService {
     }
 
 
-    public List<Dish> list(Long setmealId) {
-        Setmeal setmeal = Setmeal.builder()
-                .categoryId(setmealId)
-                .status(StatusConstant.ENABLE)
-                .build();
-        return setmealMapper.list(setmeal);
+
+
+
+    public List<Setmeal> list(Setmeal setmeal) {
+        List<Setmeal> list = setmealMapper.list(setmeal);
+        return list;
     }
 
 
@@ -168,4 +169,15 @@ public class SetmealServiceImpl implements SetmealService {
                 .build();
         setmealMapper.update(setmeal);
     }
+
+    /**
+     * 根据id查询菜品选项
+     * @param id
+     * @return
+     */
+    public List<DishItemVO> getDishItemById(Long id) {
+        return setmealMapper.getDishItemBySetmealId(id);
+    }
+
+
 }
