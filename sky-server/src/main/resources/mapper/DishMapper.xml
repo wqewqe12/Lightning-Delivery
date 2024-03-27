@@ -4,10 +4,10 @@
 <mapper namespace="com.sky.mapper.DishMapper">
 
    <insert id="insert"  useGeneratedKeys="true" keyProperty="id">
-#  image因为没阿里云，所以图片去掉 ,#{image}
-       insert into dish (name, category_id, price, description, create_time, update_time, create_user, update_user)
+       insert into dish (
+                         name,image ,category_id, price, description, create_time, update_time, create_user, update_user)
            VALUE
-             (#{name},#{categoryId},#{price},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser})
+             (#{name},#{image},#{categoryId},#{price},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser})
    </insert>
 
     <delete id="deleteByIds">
@@ -62,5 +62,12 @@
             </if>
         </where>
         order by create_time desc
+    </select>
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from dish
+        <where>
+            <if test="status != null"> and status = #{status} </if>
+            <if test="categoryId != null"> and category_id = #{categoryId} </if>
+        </where>
     </select>
 </mapper>

@@ -45,7 +45,7 @@ public class DishServiceImpl implements DishService {
         Dish dish = new Dish();
         BeanUtils.copyProperties(dishDTO,dish);
         //向菜品表插入1条数据
-        dishMapper.insert(dishDTO);
+        dishMapper.insert(dish);
         //获得isnert执行生产的主键值id
         Long dishId = dish.getId();
 

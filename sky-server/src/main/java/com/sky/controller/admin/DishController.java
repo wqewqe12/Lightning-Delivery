@@ -29,10 +29,11 @@ public class    DishController {
 
     @Autowired
     private DishService dishService;
+
     @PostMapping
     @ApiOperation("新增菜品")
-    public Result save(@PathVariable DishDTO dishDTO){
-        log.info("新增菜品:{}",dishDTO);
+    public Result save(@RequestBody DishDTO dishDTO){
+        log.info("新增菜品：{}",dishDTO);
         dishService.saveWithFlavor(dishDTO);
         return Result.success();
     }
